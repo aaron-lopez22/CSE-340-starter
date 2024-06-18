@@ -3,11 +3,51 @@ header {
   grid-template-columns: 1fr 1fr;
   font-size: 1.5rem;
   padding: 20px 20px;
-  margin: 20px 20px;
+  
   justify-items: center;
   text-decoration: none;
+  margin-bottom: 5px;
   
   
+}
+.siteName {
+  text-decoration: none;
+  text-align: left;
+}
+
+button {
+  display: inline-block;
+  padding: 15px 30px;
+  font-size: 16px;
+  color: white;
+  background-color: #007BFF;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+/* Add some padding to center the button text */
+button {
+  padding: 15px 30px;
+}
+
+/* Hover effect */
+button:hover {
+  background-color: #0056b3;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Active effect */
+button:active {
+  background-color: #004494;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Focus effect */
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
 }
 section {
   text-align: left;
@@ -20,13 +60,14 @@ section {
   
 }
 body {
+  background-image: url('/images/site/checkerboard.jpg');
   display: flex;
   padding: 0;
   justify-content: center;
   width: 100%;
   margin: 0;
   background-color: black;
-  height: 100vh;
+  height: 100%;
 }
 
 #littlenav {
@@ -46,7 +87,6 @@ nav {
   background-color: #333;
   text-align: center;
   width: 100%;
-  padding: 5px;
 }
 nav ul li {
   padding-right: 25px;
@@ -75,13 +115,14 @@ header, footer {
   color: black;
   text-align: left;
   padding: 1px;
+  width: 100%;
 }
 
 
 nav ul li a {
   color: white;
   text-decoration: none;
-  padding: 10px 15px;
+  padding: 10px 5px;
   display: block;
   text-align: center;
 }
@@ -97,7 +138,7 @@ nav ul li a:hover {
 
 .bulleted-sentences p {
   position: relative;
-  margin-bottom: 10px;
+
 }
 
 .bulleted-sentences p::before {

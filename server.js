@@ -13,6 +13,7 @@ const static = require("./routes/static")
 
 app.use(express.static('public'))
 app.use(expressLayouts)
+app.use(static)
 
 /* ***********************
  * View Engines and Templates
@@ -25,7 +26,7 @@ app.get("/", function(req, res){
   res.render("index", {title: "Home"})
 })
 
-app.use(static)
+
 
 /* ***********************
  * Local Server Information

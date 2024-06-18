@@ -1,6 +1,110 @@
-/******* Change Box Model ***************/
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
+header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  font-size: 1.5rem;
+  padding: 20px 20px;
+  margin: 20px 20px;
+  justify-items: center;
+  text-decoration: none;
+  
+  
+}
+section {
+  text-align: left;
+  padding-top: 20px;
+}
+
+#myaccount {
+  font-size: 1.0rem;
+  text-decoration: none;
+  
+}
+body {
+  display: flex;
+  padding: 0;
+  justify-content: center;
+  width: 100%;
+  margin: 0;
+  background-color: black;
+  height: 100vh;
+}
+
+#littlenav {
+  display: inline-block; /* Allows the span to take specific width and height */
+  width: 200px; /* Set the width of the box */
+  height: 250px; /* Set the height of the box */
+  background-color: rgb(255, 255, 255); /* Semi-transparent background */
+  color: rgb(48, 137, 189); /* Text color */
+  padding: 10px; /* Padding inside the box */
+  border: 1px solid #ccc; /* Optional: Border around the box */
+  border-radius: 5px; /* Optional: Rounded corners */
+  text-align: center; /* Center the text */ /* Vertically center the text (height - padding) */
+}
+
+nav {
+  font-size: 1.2rem;
+  background-color: #333;
+  text-align: center;
+  width: 100%;
+  padding: 5px;
+}
+nav ul li {
+  padding-right: 25px;
+  padding-left: 25px;
+}
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+#wrapper {
+  height: 100vh;
+  align-self: center;
+  width: 70%; /* Adjust the width as needed */
+  background-color: white;
+  border-left: 5px solid #1bb2ee; /* Left border */
+  border-right: 5px solid #1bb2ee; /* Right border */
+  padding: 20px; /* Optional: Padding inside the wrapper */
+}
+
+header, footer {
+  background-color: white;
+  color: black;
+  text-align: left;
+  padding: 1px;
+}
+
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  padding: 10px 15px;
+  display: block;
+  text-align: center;
+}
+
+nav ul li a:hover {
+  background-color: #575757;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.bulleted-sentences p {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.bulleted-sentences p::before {
+  content: "•"; /* Unicode character for bullet */
+  position: relative;
+  right: 2px;
+  color: black;
+  font-size: 20px; /* Adjust size as needed */
+  line-height: 1;
 }

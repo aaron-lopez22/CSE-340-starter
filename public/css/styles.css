@@ -1,3 +1,5 @@
+/*colors for the page 00E3FF blue background color and nav 525252*/
+
 header {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -9,18 +11,32 @@ header {
   
   
 }
-.siteName {
+
+#motor {
   text-decoration: none;
+  color: black;
+  font-weight: 200;
+  font-size: 1.8rem;
+}
+
+#motor:hover {
+  color: blue;
+}
+
+#upgrades {
+  text-align: center;
+  display: grid;
+  grid-template-columns: 2fr 2fr;
 }
 
 button {
   display: inline-block;
-  padding: 15px 30px;
+  padding: 10px 20px;
   font-size: 16px;
-  color: white;
-  background-color: #007BFF;
+  color: #00E3FF;
+  background-color: #525252;
   border: none;
-  border-radius: 50px;
+  border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s, box-shadow 0.3s;
 }
@@ -32,7 +48,7 @@ button {
 
 /* Hover effect */
 button:hover {
-  background-color: #0056b3;
+  background-color: black;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
 
@@ -52,9 +68,20 @@ section {
   padding-top: 20px;
 }
 
+.upgradeimages {
+  background-color: #00BBD4;
+  margin: 10px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+
+}
+
+.upgradeimages a {
+  color: black;
+}
 #myaccount {
   font-size: 1.0rem;
   text-decoration: none;
+  color: black;
   
 }
 body {
@@ -64,10 +91,14 @@ body {
   justify-content: center;
   width: 100%;
   margin: 0;
-  background-color: black;
+  background-color: #525252;
   height: 100%;
+  
 }
-
+#main {
+  justify-items: center;
+  justify-content: center;
+}
 #littlenav {
   display: inline-block; /* Allows the span to take specific width and height */
   width: 200px; /* Set the width of the box */
@@ -77,11 +108,13 @@ body {
   padding: 10px; /* Padding inside the box */
   border-radius: 5px; /* Optional: Rounded corners */
   text-align: center; /* Center the text */ /* Vertically center the text (height - padding) */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+
 }
 
 nav {
   font-size: 1.2rem;
-  background-color: #333;
+  background-color: #525252;
   text-align: center;
   width: 100%;
 }
@@ -98,12 +131,22 @@ nav ul {
 }
 
 #wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
   height: 100vh;
-  width: 70%; /* Adjust the width as needed */
+  width: 60%; /* Adjust the width as needed */
   background-color: white;
-  border-left: 5px solid #1bb2ee; /* Left border */
-  border-right: 5px solid #1bb2ee; /* Right border */
+  border-left: 8px solid #00BBD4; /* Left border */
+  border-right: 8px solid #00BBD4; /* Right border */
   padding: 20px; /* Optional: Padding inside the wrapper */
+
+}
+
+header, nav, footer {
+  width: 100%;
+
 }
 
 header, footer {
@@ -124,6 +167,7 @@ nav ul li a {
 }
 
 nav ul li a:hover {
+  color: #00E3FF;
   background-color: #575757;
 }
 
@@ -137,6 +181,8 @@ nav ul li a:hover {
 
 }
 
+
+
 .bulleted-sentences p::before {
   content: "•"; /* Unicode character for bullet */
   position: relative;
@@ -144,4 +190,13 @@ nav ul li a:hover {
   color: black;
   font-size: 20px; /* Adjust size as needed */
   line-height: 1;
+}
+
+h3 {
+  font-weight: 700;
+}
+
+p {
+  font-size: 1.0rem;
+  font-weight: 650;
 }

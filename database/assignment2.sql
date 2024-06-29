@@ -2,7 +2,7 @@ CREATE TYPE public.account_type AS ENUM
     ('Client', 'Employee', 'Admin');
 
 ALTER TYPE public.account_type
-    OWNER TO assignment2;
+    OWNER TO assignment2_aal;
 
     -- Table structure for table 'classification'
 CREATE TABLE public.classification (
@@ -68,7 +68,7 @@ INSERT INTO public.inventory (
     inv_miles,
     inv_color,
     classification_id
-  );
+  )
 VALUES   (
     'Chevy',
     'Camaro',

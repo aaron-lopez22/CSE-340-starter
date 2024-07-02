@@ -11,10 +11,12 @@ const expressLayouts = require("express-ejs-layouts")
 const env = require("dotenv").config()
 const app = express()
 const static = require("./routes/static")
+const inventoryRoute = require("./routes/inventoryRoute")
 
 app.use(express.static('public'))
 app.use(expressLayouts)
 app.use(static)
+
 
 /* ***********************
  * View Engines and Templates

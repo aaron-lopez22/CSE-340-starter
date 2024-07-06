@@ -1,15 +1,14 @@
 /*colors for the page 00E3FF blue background color and nav 525252*/
 
 header {
+
   display: grid;
   grid-template-columns: 1fr 1fr;
   font-size: 1.5rem;
   padding: 20px 20px;
   justify-items: center;
   text-decoration: none;
-  margin-bottom: 5px;
-  
-  
+  margin-bottom: 10px;
 }
 
 #motor {
@@ -92,7 +91,6 @@ body {
   width: 100%;
   margin: 0;
   background-color: #525252;
-  height: 100%;
   
 }
 #main {
@@ -113,6 +111,7 @@ body {
 }
 
 nav {
+  margin: 5px;
   font-size: 1.2rem;
   background-color: #525252;
   text-align: center;
@@ -135,7 +134,7 @@ nav ul {
   flex-direction: column;
   justify-content: center; /* Center vertically */
   align-items: center; /* Center horizontally */
-  height: 100vh;
+  min-height: 100vh;
   width: 60%; /* Adjust the width as needed */
   background-color: white;
   border-left: 8px solid #00BBD4; /* Left border */
@@ -199,4 +198,47 @@ h3 {
 p {
   font-size: 1.0rem;
   font-weight: 650;
+}
+
+#inv-display {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  font-size: 1.0rem;
+  text-decoration: none;
+  text-align: center;
+  margin: 5px;
+  background-color: #00BBD4;
+  padding: 10px;
+}
+#inv-display a {
+  text-decoration: none;
+  color: white;
+}
+
+#inv-display a:hover{
+  color: #00E3FF;
+}
+#inv-display li {
+  list-style-type: none;
+  padding: 10px; /* Optional: Remove default padding */
+  margin: 10px; /* Optional: Remove default margin */
+  background-color: #525252;
+
+}
+#inv-display hr {
+  width: 40px;
+}
+
+.namePrice h2{
+  text-decoration: none;
+  color: #00E3FF;
+  
+}
+
+.namePrice {
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+  background-color: black;
+  padding: 5px;
+  padding-bottom: 10px;
+  color: white;
 }

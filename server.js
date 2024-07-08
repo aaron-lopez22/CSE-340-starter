@@ -42,5 +42,5 @@ const port = process.env.PORT;
 const host = process.env.HOST;
 
 app.listen(port, () => {
-  console.log(`App listening on ${host}:${port}`);
+  console.log(`app listening on ${host}:${port}`);
 });

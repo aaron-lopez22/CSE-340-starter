@@ -253,3 +253,83 @@ p {
   background-color: #525252;
   padding: 8px;
 }
+
+.login-container {
+  margin: 15px;
+  background-color: black;
+  border: 2px solid #00BBD4;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+  padding: 20px;
+  border-radius: 5px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-container h1 {
+  margin: 0 0 20px;
+  font-size: 24px;
+  color: #00E3FF;
+}
+
+.login-container form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-container input[type="email"],
+.login-container input[type="password"] {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.login-container button {
+  padding: 10px;
+  font-size: 16px;
+  color: white;
+  background-color: #525252;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.login-container button:hover {
+  background-color: #00BBD4;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.login-container .register-link {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.login-container .register-link a {
+  color: #00BBD4;
+  text-decoration: none;
+}
+
+.login-container .register-link a:hover {
+  text-decoration: underline;
+}
+.login-container p {
+  color: white;
+}
+
+.flash-message {
+  color: red;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.login-container a {
+  color: white;
+}
+
+.login-container a:hover {
+  color: #00E3FF;
+}

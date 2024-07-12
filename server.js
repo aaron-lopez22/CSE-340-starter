@@ -4,15 +4,42 @@ const dotenv = require("dotenv").config();
 const path = require("path");
 const baseController = require("./controllers/baseController");
 const inventoryRoute = require("./routes/inventoryRoute");
+const accountRoute = require("./routes/accountRoute")
 const staticRoutes = require("./routes/static");
 const utilities = require('./utilities/');
+const session = require("express-session")
+const pool = require('./database/')
+
 
 const app = express();
+
 
 app.use(express.static('public'));
 app.use(expressLayouts);
 app.use("/", staticRoutes);
 app.use("/inv", inventoryRoute);
+app.use("/account", accountRoute);
+
+/* ***********************
+ * Middleware
+ * ************************/
+app.use(session({
+  store: new (require('connect-pg-simple')(session))({
+    createTableIfMissing: true,
+    pool,
+  }),
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true,
+  name: 'sessionId',
+}))
+
+// Express Messages Middleware
+app.use(require('connect-flash')())
+app.use(function(req, res, next){
+  res.locals.messages = require('express-messages')(req, res)
+  next()
+})
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));

@@ -1,0 +1,18 @@
+<div class="login-container">
+<% if (title) { %>
+    <h1><%= title %></h1>
+<% } else { %>
+    <h1>Login</h1>
+
+<% } %>
+<% if (typeof message !== 'undefined' && message.length > 0) { %>
+    <div class="flash-message"><%= message %></div>
+<% } %>
+
+<form action="/account/login" method="POST">
+    <input type="email" name="email" placeholder="Email Address" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <button type="submit">Login</button>
+    <p>No account <a href="#">sign up?</a></p>
+</form>
+<div class="register-link">

@@ -383,3 +383,19 @@ p {
   text-align: center;
   margin-bottom: 10px;
 }
+
+/* Styling for invalid input fields */
+input:required:invalid, input:focus:invalid {
+  border: 2px solid red;
+  background-image: url('/images/invalid.png');
+  background-position: right top;
+  background-repeat: no-repeat;
+}
+
+/* Styling for valid input fields */
+input:required:valid {
+  border: 2px solid green;
+  background-image: url('/images/valid.png');
+  background-position: right top;
+  background-repeat: no-repeat;
+}

@@ -6,18 +6,19 @@
         <h1>Login</h1>
     <% } %>
 
-    <% if (messages.notice) { %>
-        <div class="flash-message">
-            <% messages.notice.forEach(function(message){ %>
-                <p><%= message %></p>
+ 
+
+    <% if (errors && errors.length > 0) { %>
+        <ul class="notice">
+            <% errors.forEach(function(error) { %>
+                <li><%= error.msg %></li>
             <% }) %>
-        </div>
+        </ul>
     <% } %>
 
     <form action="/account/login" method="POST">
-        <input type="email" name="account_email" placeholder="Enter a valid email address" required>
-        <input type="password" name="account_password" placeholder="Password" required
-               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{12,}">
+        <input type="email" name="account_email" placeholder="Enter a valid email address" required value="<%= locals.account_email %>">
+        <input type="password" name="account_password" placeholder="Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{12,}">
         <button type="submit">Login</button>
         <p>No account? <a href="/account/register">Sign up?</a></p>
 </div>

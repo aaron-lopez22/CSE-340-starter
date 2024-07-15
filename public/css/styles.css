@@ -1,7 +1,6 @@
 /*colors for the page 00E3FF blue background color and nav 525252*/
 
 header {
-
   display: grid;
   grid-template-columns: 1fr 1fr;
   font-size: 1.5rem;
@@ -71,7 +70,6 @@ section {
   background-color: #00BBD4;
   margin: 10px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
-
 }
 
 .upgradeimages a {
@@ -81,7 +79,6 @@ section {
   font-size: 1.0rem;
   text-decoration: none;
   color: black;
-  
 }
 body {
   background-image: url('/images/site/checkerboard.jpg');
@@ -91,7 +88,6 @@ body {
   width: 100%;
   margin: 0;
   background-color: #525252;
-  
 }
 #main {
   justify-items: center;
@@ -107,7 +103,6 @@ body {
   border-radius: 5px; /* Optional: Rounded corners */
   text-align: center; /* Center the text */ /* Vertically center the text (height - padding) */
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
-
 }
 
 nav {
@@ -140,12 +135,10 @@ nav ul {
   border-left: 8px solid #00BBD4; /* Left border */
   border-right: 8px solid #00BBD4; /* Right border */
   padding: 20px; /* Optional: Padding inside the wrapper */
-
 }
 
 header, nav, footer {
   width: 100%;
-
 }
 
 header, footer {
@@ -155,7 +148,6 @@ header, footer {
   padding: 1px;
   width: 100%;
 }
-
 
 nav ul li a {
   color: white;
@@ -177,10 +169,7 @@ nav ul li a:hover {
 
 .bulleted-sentences p {
   position: relative;
-
 }
-
-
 
 .bulleted-sentences p::before {
   content: "•"; /* Unicode character for bullet */
@@ -215,7 +204,7 @@ p {
   color: white;
 }
 
-#inv-display a:hover{
+#inv-display a:hover {
   color: #00E3FF;
 }
 #inv-display li {
@@ -223,16 +212,14 @@ p {
   padding: 10px; /* Optional: Remove default padding */
   margin: 10px; /* Optional: Remove default margin */
   background-color: #525252;
-
 }
 #inv-display hr {
   width: 40px;
 }
 
-.namePrice h2{
+.namePrice h2 {
   text-decoration: none;
   color: #00E3FF;
-  
 }
 
 .namePrice {
@@ -398,4 +385,8 @@ input:required:valid {
   background-image: url('/images/valid.png');
   background-position: right top;
   background-repeat: no-repeat;
+}
+
+.notice {
+  color: red;
 }

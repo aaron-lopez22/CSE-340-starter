@@ -6,10 +6,9 @@
         <h1>Register</h1>
     <% } %>
 
-    <%- messages() %>
     <% if (errors && errors.length > 0) { %>
         <ul class="notice">
-            <% errors.forEach(error => { %>
+            <% errors.forEach(function(error) { %>
                 <li><%= error.msg %></li>
             <% }) %>
         </ul>
@@ -17,11 +16,10 @@
 
 
     <form action="/account/register" method="POST">
-        <input type="text" name="account_firstname" placeholder="First Name" required>
-        <input type="text" name="account_lastname" placeholder="Last Name" required>
-        <input type="email" name="account_email" placeholder="Enter a valid email address" required>
-        <input type="password" name="account_password" placeholder="Password" required
-               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{12,}">
+        <input type="text" name="account_firstname" id="accountFirstname" placeholder="First Name" required value="<%= locals.account_firstname %>">
+        <input type="text" name="account_lastname" id="accountLastname" placeholder="Last Name" required value="<%= locals.account_lastname %>">
+        <input type="email" name="account_email" id="accountEmail" placeholder="Enter a valid email address" required value="<%= locals.account_email %>">
+        <input type="password" name="account_password" placeholder="Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{12,}">
         <button type="submit">Register</button>
     </form>
 </div>

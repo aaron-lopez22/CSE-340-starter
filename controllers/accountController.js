@@ -9,9 +9,10 @@ async function buildLogin(req, res, next) {
     res.render("account/login", {
         title: "Login",
         nav,
+        errors: [],
+        account_email: "",
     });
 }
-
 
 /* ****************************************
 *  Deliver registration view
@@ -56,4 +57,43 @@ async function registerAccount(req, res) {
     }
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount };
+/* ****************************************
+*  Process Login
+* *************************************** */
+async function loginAccount(req, res) {
+    let nav = await utilities.getNav();
+    const { account_email, account_password } = req.body;
+
+    try {
+        // Add your login logic here
+        const loginResult = await accountModel.loginAccount(
+            account_email,
+            account_password
+        );
+
+        if (loginResult) {
+            req.flash("notice", `Welcome back, ${loginResult.account_firstname}!`);
+            return res.status(200).redirect("/account/dashboard");
+        } else {
+            req.flash("notice", "Login failed. Please check your email and password.");
+            return res.status(401).render("account/login", {
+                title: "Login",
+                nav,
+                errors: [{ msg: "Invalid email or password" }],
+                account_email,
+            });
+        }
+    } catch (error) {
+        console.error('Controller Error:', error.message);
+        req.flash("notice", `Login failed: ${error.message}`);
+        return res.status(501).render("account/login", {
+            title: "Login",
+            nav,
+            errors: [{ msg: `Login failed: ${error.message}` }],
+            account_email,
+        });
+    }
+}
+
+
+module.exports = { buildLogin, buildRegister, registerAccount, loginAccount };

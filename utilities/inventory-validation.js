@@ -73,14 +73,26 @@ validate.checkInventoryData = async (req, res, next) => {
         let nav = await utilities.getNav();
         let classificationList = await utilities.buildClassificationList(req.body.classification_id);
         return res.render('inventory/add-inventory', {
-            title: 'Add Inventory',
+            title: 'Add New Inventory Item',
             nav,
             classificationList,
             errors: errors.array(),
-            ...req.body
+            locals: {
+                classification_id: req.body.classification_id,
+                inv_make: req.body.inv_make,
+                inv_model: req.body.inv_model,
+                inv_description: req.body.inv_description,
+                inv_price: req.body.inv_price,
+                inv_year: req.body.inv_year,
+                inv_miles: req.body.inv_miles,
+                inv_color: req.body.inv_color,
+                inv_image: req.body.inv_image,
+                inv_thumbnail: req.body.inv_thumbnail
+            }
         });
     }
     next();
 }
+
 
 module.exports = validate;

@@ -109,11 +109,50 @@ invCont.addInventory = async function (req, res, next) {
       });
     } else {
       req.flash('error', 'Failed to add new inventory item.');
-      res.redirect('/inv/add-inventory');
+      let nav = await utilities.getNav();
+      let classificationList = await utilities.buildClassificationList(classification_id);
+      res.render('inventory/add-inventory', {
+        title: "Add New Inventory Item",
+        nav,
+        classificationList,
+        errors: req.flash('error'),
+        locals: {
+          classification_id,
+          inv_make,
+          inv_model,
+          inv_description,
+          inv_price,
+          inv_year,
+          inv_miles,
+          inv_color,
+          inv_image,
+          inv_thumbnail
+        }
+      });
     }
   } catch (error) {
     req.flash('error', 'An error occurred. Please try again.');
-    res.redirect('/inv/add-inventory');
+    let nav = await utilities.getNav();
+    let classificationList = await utilities.buildClassificationList(classification_id);
+    res.render('inventory/add-inventory', {
+      title: "Add New Inventory Item",
+      nav,
+      classificationList,
+      errors: req.flash('error'),
+      locals: {
+        classification_id,
+        inv_make,
+        inv_model,
+        inv_description,
+        inv_price,
+        inv_year,
+        inv_miles,
+        inv_color,
+        inv_image,
+        inv_thumbnail
+      }
+    });
   }
 }
+
 module.exports = invCont;

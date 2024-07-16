@@ -45,4 +45,75 @@ invCont.buildByInventoryId = async function (req, res, next) {
   }
 };
 
-module.exports = invCont
+invCont.buildManagement = async function (req, res, next) {
+  let nav = await utilities.getNav();
+  res.render("inventory/management", {
+    title: "Inventory Management",
+    nav
+  });
+}
+
+
+invCont.buildAddClassification = async function (req, res, next) {
+  let nav = await utilities.getNav();
+  res.render("inventory/add-classification", {
+    title: "Add Classification",
+    nav
+  });
+}
+
+invCont.addClassification = async function (req, res, next) {
+  const { classification_name } = req.body;
+  try {
+    const result = await invModel.addClassification(classification_name);
+    if (result) {
+      let nav = await utilities.getNav();
+      req.flash('success', 'New classification added successfully.');
+      res.render("inventory/management", {
+        title: "Inventory Management",
+        nav,
+        success: req.flash('success')
+      });
+    } else {
+      req.flash('error', 'Failed to add new classification.');
+      res.redirect('/inv/add-classification');
+    }
+  } catch (error) {
+    req.flash('error', 'An error occurred. Please try again.');
+    res.redirect('/inv/add-classification');
+  }
+}
+
+
+invCont.buildAddInventory = async function (req, res, next) {
+  let nav = await utilities.getNav();
+  let classificationList = await utilities.buildClassificationList();
+  res.render("inventory/add-inventory", {
+    title: "Add New Inventory Item",
+    nav,
+    classificationList
+  });
+}
+
+invCont.addInventory = async function (req, res, next) {
+  const { classification_id, inv_make, inv_model, inv_description, inv_price, inv_year, inv_miles, inv_color, inv_image, inv_thumbnail } = req.body;
+  try {
+    const result = await invModel.addInventory({ classification_id, inv_make, inv_model, inv_description, inv_price, inv_year, inv_miles, inv_color, inv_image, inv_thumbnail });
+    if (result) {
+      let nav = await utilities.getNav();
+      req.flash('success', 'New inventory item added successfully.');
+      res.render("inventory/management", {
+        title: "Inventory Management",
+        nav,
+        success: req.flash('success')
+      });
+    } else {
+      req.flash('error', 'Failed to add new inventory item.');
+      res.redirect('/inv/add-inventory');
+    }
+  } catch (error) {
+    req.flash('error', 'An error occurred. Please try again.');
+    res.redirect('/inv/add-inventory');
+  }
+}
+module.exports = invCont;

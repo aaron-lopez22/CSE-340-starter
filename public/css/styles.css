@@ -390,3 +390,206 @@ input:required:valid {
 .notice {
   color: red;
 }
+
+.management-container {
+  background-color: black;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+  color: white;
+  margin: 20px auto;
+  width: 80%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.management-container h1 {
+  text-align: center;
+  font-size: 2rem;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.management-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.management-container label {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+
+.management-container input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.management-container button {
+  padding: 10px;
+  font-size: 16px;
+  color: white;
+  background-color: #525252;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.management-container button:hover {
+  background-color: #00BBD4;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.management-container ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 20px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.management-container ul li {
+  background-color: #525252;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.management-container ul li a {
+  text-decoration: none;
+  color: #00E3FF;
+  font-weight: 700;
+}
+
+.management-container ul li a:hover {
+  color: #FFFFFF;
+  padding: 5px;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+.classification-container {
+  background-color: black;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+  color: white;
+  margin: 20px auto;
+  width: 80%;
+  max-width: 800px;
+}
+
+.classification-container h1 {
+  text-align: center;
+  font-size: 2rem;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.classification-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.classification-container label {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+
+.classification-container input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.classification-container button {
+  padding: 10px;
+  font-size: 16px;
+  color: #00E3FF;
+  background-color: #525252;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.classification-container button:hover {
+  color: white;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.inventory-container {
+  background-color: #00E3FF;
+  padding: 45px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+  color: #525252;
+  margin: 20px auto;
+  width: 80%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inventory-container h1 {
+  text-align: center;
+  font-size: 2rem;
+  color: #525252;
+  margin-bottom: 20px;
+}
+
+.inventory-container form {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.inventory-container label {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+
+.inventory-container input,
+.inventory-container textarea,
+.inventory-container select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.inventory-container button {
+  padding: 15px;
+  font-size: 16px;
+  color: #00E3FF;
+  background-color: #525252;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.inventory-container button:hover {
+  color: white;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.notice {
+  color: red;
+  list-style-type: none;
+}

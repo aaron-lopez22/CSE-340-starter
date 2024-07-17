@@ -68,7 +68,6 @@ async function registerAccount(req, res) {
             title: "Register",
             nav,
             message: `Registration failed: ${error.message}`,
-            locals: { account_firstname, account_lastname, account_email },
             errors: null,
         });
     }

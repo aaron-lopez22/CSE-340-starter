@@ -174,16 +174,30 @@ invCont.getInventoryJSON = async (req, res, next) => {
 /* ***************************
  *  Build Edit Inventory View
  * ************************** */
-invCont.buildEditInventory = async (req, res, next) => {
-  const inventory_id = parseInt(req.params.inventory_id);
+invCont.buildEditInventory = async function (req, res, next) {
+  const inv_id = parseInt(req.params.inventory_id); // Collect and store the incoming inventory_id as an integer
   try {
-    const invData = await invModel.getInventoryByInvId(inventory_id);
-    if (invData) {
-      let nav = await utilities.getNav();
-      res.render("inventory/edit-inventory", {
-        title: "Edit Inventory",
+    let nav = await utilities.getNav();
+    const itemData = await invModel.getInventoryByInvId(inv_id); // Get all the inventory item data based on the inventory_id
+    if (itemData) {
+      const classificationSelect = await utilities.buildClassificationList(itemData.classification_id);
+      const itemName = `${itemData.inv_make} ${itemData.inv_model}`; // Create a "name" variable to hold the Make and Model of the inventory item
+      res.render("./inventory/edit-inventory", {
+        title: "Edit " + itemName, // Append the name variable into the "title" property
         nav,
-        invData,
+        classificationSelect: classificationSelect,
+        errors: null,
+        inv_id: itemData.inv_id,
+        inv_make: itemData.inv_make,
+        inv_model: itemData.inv_model,
+        inv_year: itemData.inv_year,
+        inv_description: itemData.inv_description,
+        inv_image: itemData.inv_image,
+        inv_thumbnail: itemData.inv_thumbnail,
+        inv_price: itemData.inv_price,
+        inv_miles: itemData.inv_miles,
+        inv_color: itemData.inv_color,
+        classification_id: itemData.classification_id
       });
     } else {
       next(new Error("No inventory item found"));

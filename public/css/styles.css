@@ -440,6 +440,15 @@ input:required:valid {
   color: black;
 }
 
+.management-container table td a{
+  color: white;
+  text-decoration: none;
+}
+
+.management-container table td a:hover{
+  color: #00E3FF;
+  text-decoration: none;
+}
 .management-container table td {
   background-color: #525252;
   color: #00E3FF;

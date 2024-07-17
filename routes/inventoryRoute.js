@@ -11,5 +11,7 @@ router.get("/add-classification", utilities.handleErrors(invController.buildAddC
 router.post("/add-classification", regValidate.classificationRules(), regValidate.checkClassificationData, utilities.handleErrors(invController.addClassification));
 router.get("/add-inventory", utilities.handleErrors(invController.buildAddInventory));
 router.post("/add-inventory", regValidate.inventoryRules(), regValidate.checkInventoryData, utilities.handleErrors(invController.addInventory));
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+
 
 module.exports = router;

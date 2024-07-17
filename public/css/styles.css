@@ -391,6 +391,7 @@ input:required:valid {
   color: red;
 }
 
+/* Styles for the management view */
 .management-container {
   background-color: black;
   padding: 20px;
@@ -408,43 +409,45 @@ input:required:valid {
 .management-container h1 {
   text-align: center;
   font-size: 2rem;
-  color: white;
+  color: #00E3FF;
   margin-bottom: 20px;
 }
 
-.management-container form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 100%;
-  max-width: 400px;
-}
-
-.management-container label {
+.management-container p {
+  text-align: center;
   font-size: 1.2rem;
-  margin-bottom: 5px;
+  color: #ccc;
 }
 
-.management-container input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.management-container button {
-  padding: 10px;
-  font-size: 16px;
-  color: white;
+.management-container table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
   background-color: #525252;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s, box-shadow 0.3s;
+  color: white;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
 }
 
-.management-container button:hover {
+.management-container table th,
+.management-container table td {
+  padding: 10px;
+  border: 1px solid #00E3FF;
+  text-align: center;
+}
+
+.management-container table th {
   background-color: #00BBD4;
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  color: black;
+}
+
+.management-container table td {
+  background-color: #525252;
+  color: #00E3FF;
+}
+
+.management-container noscript {
+  color: red;
+  margin-top: 20px;
 }
 
 .management-container ul {
@@ -477,6 +480,41 @@ input:required:valid {
   padding: 5px;
   border-radius: 5px;
   transition: background-color 0.3s, color 0.3s;
+}
+
+/* Style for the select element */
+.management-container select {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #00BBD4;
+  border-radius: 5px;
+  background-color: #525252;
+  color: #00E3FF;
+  font-size: 1rem;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+  appearance: none; /* Remove default arrow */
+  -webkit-appearance: none; /* Remove default arrow in Safari */
+  -moz-appearance: none; /* Remove default arrow in Firefox */
+}
+
+/* Custom arrow for the select element */
+.management-container select::after {
+  content: '\25BC'; /* Unicode character for down arrow */
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none; /* Allows clicks to pass through the arrow */
+}
+
+/* Style for the select options */
+.management-container select option {
+  background-color: #525252;
+  color: #00E3FF;
 }
 .classification-container {
   background-color: black;
@@ -592,4 +630,8 @@ input:required:valid {
 .notice {
   color: red;
   list-style-type: none;
+}
+
+#classificationlist {
+  padding: 10px;
 }

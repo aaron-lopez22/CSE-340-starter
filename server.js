@@ -11,6 +11,7 @@ const session = require("express-session");
 const pool = require('./database/');
 const bodyParser = require("body-parser");
 const flash = require("connect-flash");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static('public'));
 app.use(expressLayouts);
+app.use(cookieParser())
 
 // Middleware for session handling
 app.use(session({

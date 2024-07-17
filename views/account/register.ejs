@@ -16,9 +16,9 @@
 
 
     <form action="/account/register" method="POST">
-        <input type="text" name="account_firstname" id="accountFirstname" placeholder="First Name" required value="<%= locals.account_firstname %>">
-        <input type="text" name="account_lastname" id="accountLastname" placeholder="Last Name" required value="<%= locals.account_lastname %>">
-        <input type="email" name="account_email" id="accountEmail" placeholder="Enter a valid email address" required value="<%= locals.account_email %>">
+        <input type="text" name="account_firstname" id="accountFirstname" placeholder="First Name" required value="<%= locals.account_firstname || '' %>">
+        <input type="text" name="account_lastname" id="accountLastname" placeholder="Last Name" required value="<%= locals.account_lastname || '' %>">
+        <input type="email" name="account_email" id="accountEmail" placeholder="Enter a valid email address" required value="<%= locals.account_email || '' %>">
         <input type="password" name="account_password" placeholder="Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{12,}">
         <button type="submit">Register</button>
     </form>

@@ -1,0 +1,12 @@
+<div class="account-management-container">
+    <h1>Account Management</h1>
+    
+    <% if (success) { %>
+        <div class="flash-message success"><%= success %></div>
+    <% } %>
+    <% if (error) { %>
+        <div class="flash-message error"><%= error %></div>
+    <% } %>
+
+    <p>You're logged in.</p>
+</div>

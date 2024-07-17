@@ -171,4 +171,27 @@ invCont.getInventoryJSON = async (req, res, next) => {
   }
 }
 
+/* ***************************
+ *  Build Edit Inventory View
+ * ************************** */
+invCont.buildEditInventory = async (req, res, next) => {
+  const inventory_id = parseInt(req.params.inventory_id);
+  try {
+    const invData = await invModel.getInventoryByInvId(inventory_id);
+    if (invData) {
+      let nav = await utilities.getNav();
+      res.render("inventory/edit-inventory", {
+        title: "Edit Inventory",
+        nav,
+        invData,
+      });
+    } else {
+      next(new Error("No inventory item found"));
+    }
+  } catch (error) {
+    console.error("Error fetching inventory data:", error);
+    res.status(500).json({ message: "Server error: Could not fetch inventory data" });
+  }
+};
+
 module.exports = invCont;

@@ -1,0 +1,28 @@
+<div class="inventory-container">
+  <h1><%= title %></h1>
+  <form action="/inv/edit/<%= invData.inv_id %>" method="post">
+    <label for="inv_make">Make:</label>
+    <input type="text" id="inv_make" name="inv_make" value="<%= invData.inv_make %>" required>
+    
+    <label for="inv_model">Model:</label>
+    <input type="text" id="inv_model" name="inv_model" value="<%= invData.inv_model %>" required>
+    
+    <label for="inv_year">Year:</label>
+    <input type="number" id="inv_year" name="inv_year" value="<%= invData.inv_year %>" required>
+    
+    <label for="inv_price">Price:</label>
+    <input type="number" id="inv_price" name="inv_price" value="<%= invData.inv_price %>" required>
+    
+    <label for="inv_miles">Miles:</label>
+    <input type="number" id="inv_miles" name="inv_miles" value="<%= invData.inv_miles %>" required>
+    
+    <label for="inv_color">Color:</label>
+    <input type="text" id="inv_color" name="inv_color" value="<%= invData.inv_color %>" required>
+    
+    <label for="inv_description">Description:</label>
+    <textarea id="inv_description" name="inv_description" required><%= invData.inv_description %></textarea>
+    
+    <button type="submit">Save Changes</button>
+  </form>
+</div>
+

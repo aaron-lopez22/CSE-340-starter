@@ -71,6 +71,8 @@ app.use(async (err, req, res, next) => {
     });
 });
 
+app.use(utilities.checkJWTToken)
+
 const port = process.env.PORT;
 const host = process.env.HOST;
 

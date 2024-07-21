@@ -1,0 +1,26 @@
+<div class="update-account-container">
+    <h1><%= title %></h1>
+    
+    <% if (errors && errors.length > 0) { %>
+        <ul class="notice">
+            <% errors.forEach(function(error) { %>
+                <li><%= error.msg %></li>
+            <% }) %>
+        </ul>
+    <% } %>
+
+    <form action="/account/update/<%= accountData.account_id %>" method="POST">
+        <label for="account_firstname">First Name:</label>
+        <input type="text" name="account_firstname" id="account_firstname" value="<%= accountData.account_firstname %>" required>
+
+        <label for="account_lastname">Last Name:</label>
+        <input type="text" name="account_lastname" id="account_lastname" value="<%= accountData.account_lastname %>" required>
+
+        <label for="account_email">Email:</label>
+        <input type="email" name="account_email" id="account_email" value="<%= accountData.account_email %>" required>
+
+        <!-- Add other fields as necessary -->
+
+        <button type="submit">Update Account</button>
+    </form>
+</div>

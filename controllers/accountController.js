@@ -103,7 +103,8 @@ async function accountLogin(req, res) {
      return res.redirect("/account/")
      }
     } catch (error) {
-     return new Error('Access Forbidden')
+      req.flash("notice", "Access Forbidden")
+      return res.redirect("/account/login")
     }
    }
 

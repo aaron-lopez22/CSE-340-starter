@@ -208,4 +208,109 @@ invCont.buildEditInventory = async function (req, res, next) {
   }
 };
 
+/* ***************************
+ *  Build edit inventory view
+ * ************************** */
+invCont.buildEditInventory = async function (req, res, next) {
+  const inv_id = parseInt(req.params.inventoryId); // Collect and store the incoming inventory_id as an integer
+  try {
+    let nav = await utilities.getNav();
+    const itemData = await invModel.getInventoryByInvId(inv_id); // Get all the inventory item data based on the inventory_id
+    if (itemData) {
+      const classificationSelect = await utilities.buildClassificationList(itemData.classification_id);
+      const itemName = `${itemData.inv_make} ${itemData.inv_model}`; // Create a "name" variable to hold the Make and Model of the inventory item
+      res.render("./inventory/edit-inventory", {
+        title: "Edit " + itemName, // Append the name variable into the "title" property
+        nav,
+        classificationSelect: classificationSelect,
+        errors: null,
+        inv_id: itemData.inv_id,
+        inv_make: itemData.inv_make,
+        inv_model: itemData.inv_model,
+        inv_year: itemData.inv_year,
+        inv_description: itemData.inv_description,
+        inv_image: itemData.inv_image,
+        inv_thumbnail: itemData.inv_thumbnail,
+        inv_price: itemData.inv_price,
+        inv_miles: itemData.inv_miles,
+        inv_color: itemData.inv_color,
+        classification_id: itemData.classification_id
+      });
+    } else {
+      next(new Error("No inventory item found"));
+    }
+  } catch (error) {
+    console.error("Error fetching inventory data:", error);
+    res.status(500).json({ message: "Server error: Could not fetch inventory data" });
+  }
+};
+
+
+/* ***************************
+ *  Update Inventory Data
+ * ************************** */
+invCont.updateInventory = async function (req, res, next) {
+  let nav = await utilities.getNav();
+  const {
+    inv_id,
+    inv_make,
+    inv_model,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_year,
+    inv_miles,
+    inv_color,
+    classification_id,
+  } = req.body;
+
+  try {
+    const updateResult = await invModel.updateInventory(
+      inv_id,
+      inv_make,
+      inv_model,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_year,
+      inv_miles,
+      inv_color,
+      classification_id
+    );
+
+    if (updateResult) {
+      const itemName = `${updateResult.inv_make} ${updateResult.inv_model}`;
+      req.flash("notice", `The ${itemName} was successfully updated.`);
+      res.redirect("/inv/");
+    } else {
+      const classificationSelect = await utilities.buildClassificationList(classification_id);
+      const itemName = `${inv_make} ${inv_model}`;
+      req.flash("notice", "Sorry, the update failed.");
+      res.status(501).render("inventory/edit-inventory", {
+        title: "Edit " + itemName,
+        nav,
+        classificationSelect: classificationSelect,
+        errors: null,
+        inv_id,
+        inv_make,
+        inv_model,
+        inv_year,
+        inv_description,
+        inv_image,
+        inv_thumbnail,
+        inv_price,
+        inv_miles,
+        inv_color,
+        classification_id
+      });
+    }
+  } catch (error) {
+    console.error("Error updating inventory item:", error);
+    req.flash("notice", "An error occurred. Please try again.");
+    res.redirect(`/inv/edit/${inv_id}`);
+  }
+};
+
 module.exports = invCont;

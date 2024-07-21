@@ -14,6 +14,11 @@ router.post("/add-inventory", regValidate.inventoryRules(), regValidate.checkInv
 
 router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
 router.get("/edit/:inventoryId", utilities.handleErrors(invController.buildEditInventory));
-router.post("/update", regValidate.newInventoryRules(), regValidate.checkUpdateData, utilities.handleErrors(invController.updateInventory));
-
+router.post(
+    "/update",
+    regValidate.newInventoryRules(),
+    regValidate.checkUpdateData,
+    utilities.handleErrors(invController.updateInventory)
+  );
+  
 module.exports = router;

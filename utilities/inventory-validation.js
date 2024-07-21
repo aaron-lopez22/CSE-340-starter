@@ -89,63 +89,60 @@ validate.newInventoryRules = () => {
   /* ***************************
    * Check data and return errors for adding new inventory items
    * ************************** */
-  validate.checkInventoryData = async (req, res, next) => {
-    const { classification_id, inv_make, inv_model, inv_year, inv_price, inv_miles, inv_color, inv_description, inv_image, inv_thumbnail } = req.body;
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      let nav = await utilities.getNav();
-      let classificationSelect = await utilities.buildClassificationList(classification_id);
-      return res.render('inventory/add-inventory', {
-        title: 'Add New Inventory Item',
-        nav,
-        classificationSelect,
-        errors: errors.array(),
-        locals: {
-          classification_id,
-          inv_make,
-          inv_model,
-          inv_year,
-          inv_price,
-          inv_miles,
-          inv_color,
-          inv_description,
-          inv_image,
-          inv_thumbnail
-        }
-      });
-    }
-    next();
-  };
   
-  /* ***************************
-   * Check data and return errors for updating inventory items
-   * ************************** */
-  validate.checkUpdateData = async (req, res, next) => {
-    const { inv_id, classification_id, inv_make, inv_model, inv_year, inv_price, inv_miles, inv_color, inv_description, inv_image, inv_thumbnail } = req.body;
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      let nav = await utilities.getNav();
-      let classificationSelect = await utilities.buildClassificationList(classification_id);
-      return res.render('inventory/edit-inventory', {
-        title: 'Edit ' + inv_make + ' ' + inv_model,
-        nav,
-        classificationSelect,
-        errors: errors.array(),
-        locals: {
-          inv_id,
-          classification_id,
-          inv_make,
-          inv_model,
-          inv_year,
-          inv_price,
-          inv_miles,
-          inv_color,
-          inv_description,
-          inv_image,
-          inv_thumbnail
-        }
-      });
-    }
+validate.checkInventoryData = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const nav = await utilities.getNav();
+    const classificationList = await utilities.buildClassificationList();
+    res.render('inventory/add-inventory', {
+      title: 'Add New Inventory Item',
+      nav,
+      classificationList,
+      errors: errors.array(),
+      locals: {
+        classification_id: req.body.classification_id,
+        inv_make: req.body.inv_make,
+        inv_model: req.body.inv_model,
+        inv_description: req.body.inv_description,
+        inv_price: req.body.inv_price,
+        inv_year: req.body.inv_year,
+        inv_miles: req.body.inv_miles,
+        inv_color: req.body.inv_color,
+        inv_image: req.body.inv_image,
+        inv_thumbnail: req.body.inv_thumbnail
+      }
+    });
+  } else {
     next();
-  };
+  }
+}
+
+validate.checkUpdateData = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const nav = await utilities.getNav();
+    const classificationList = await utilities.buildClassificationList(req.body.classification_id);
+    res.render('inventory/edit-inventory', {
+      title: 'Edit ' + req.body.inv_make + ' ' + req.body.inv_model,
+      nav,
+      classificationList,
+      errors: errors.array(),
+      inv_id: req.body.inv_id,
+      inv_make: req.body.inv_make,
+      inv_model: req.body.inv_model,
+      inv_year: req.body.inv_year,
+      inv_description: req.body.inv_description,
+      inv_image: req.body.inv_image,
+      inv_thumbnail: req.body.inv_thumbnail,
+      inv_price: req.body.inv_price,
+      inv_miles: req.body.inv_miles,
+      inv_color: req.body.inv_color,
+      classification_id: req.body.classification_id
+    });
+  } else {
+    next();
+  }
+}
+
 module.exports = validate;

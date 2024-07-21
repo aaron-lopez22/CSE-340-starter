@@ -246,10 +246,12 @@ invCont.buildEditInventory = async function (req, res, next) {
 };
 
 
+
 /* ***************************
  *  Update Inventory Data
  * ************************** */
 invCont.updateInventory = async function (req, res, next) {
+  console.log("Update Inventory Request Body:", req.body); // Add this line for logging
   let nav = await utilities.getNav();
   const {
     inv_id,
@@ -279,6 +281,8 @@ invCont.updateInventory = async function (req, res, next) {
       inv_color,
       classification_id
     );
+
+    console.log("Update Result:", updateResult); // Add this line for logging
 
     if (updateResult) {
       const itemName = `${updateResult.inv_make} ${updateResult.inv_model}`;

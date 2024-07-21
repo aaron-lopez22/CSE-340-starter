@@ -14,11 +14,9 @@ router.post("/add-inventory", regValidate.inventoryRules(), regValidate.checkInv
 
 router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
 router.get("/edit/:inventoryId", utilities.handleErrors(invController.buildEditInventory));
-router.post(
-    "/update",
-    regValidate.newInventoryRules(),
-    regValidate.checkUpdateData,
-    utilities.handleErrors(invController.updateInventory)
-  );
-  
+router.post("/update", regValidate.newInventoryRules(), regValidate.checkUpdateData, utilities.handleErrors(invController.updateInventory));
+
+router.get("/delete/:inventoryId", utilities.handleErrors(invController.buildDeleteInventoryView)); // Route to show delete confirmation view
+router.post("/delete", utilities.handleErrors(invController.deleteInventory)); // Route to handle the actual delete
+
 module.exports = router;

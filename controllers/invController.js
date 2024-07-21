@@ -8,17 +8,24 @@ const invCont = {}
  * ************************** */
 invCont.buildByClassificationId = async function (req, res, next) {
   const classification_id = req.params.classificationId
-  const data = await invModel.getInventoryByClassificationId(classification_id)
-  const grid = await utilities.buildClassificationGrid(data)
-  let nav = await utilities.getNav()
-  const className = data[0].classification_name
-  res.render("./inventory/classification", {
-    title: className + " vehicles",
-    nav,
-    grid,
-  })
+  try {
+    const data = await invModel.getInventoryByClassificationId(classification_id)
+    if (!data || data.length === 0) {
+      throw new Error("No inventory items found for this classification.")
+    }
+    const grid = await utilities.buildClassificationGrid(data)
+    let nav = await utilities.getNav()
+    const className = data[0].classification_name
+    res.render("./inventory/classification", {
+      title: className + " vehicles",
+      nav,
+      grid,
+    })
+  } catch (error) {
+    console.error("Error building inventory by classification ID:", error)
+    next(error)
+  }
 }
-
 /* ***************************
  *  Build car detail view by inventory_id
  * ************************** */
@@ -314,6 +321,56 @@ invCont.updateInventory = async function (req, res, next) {
     console.error("Error updating inventory item:", error);
     req.flash("notice", "An error occurred. Please try again.");
     res.redirect(`/inv/edit/${inv_id}`);
+  }
+};
+
+/* ***************************
+ *  Build Delete Confirmation View
+ * ************************** */
+invCont.buildDeleteInventoryView = async function (req, res, next) {
+  const inv_id = parseInt(req.params.inventoryId);
+  try {
+    let nav = await utilities.getNav();
+    const itemData = await invModel.getInventoryByInvId(inv_id);
+    if (itemData) {
+      const itemName = `${itemData.inv_make} ${itemData.inv_model}`;
+      res.render("./inventory/delete-confirm", {
+        title: "Delete " + itemName,
+        nav,
+        errors: null,
+        inv_id: itemData.inv_id,
+        inv_make: itemData.inv_make,
+        inv_model: itemData.inv_model,
+        inv_year: itemData.inv_year,
+        inv_price: itemData.inv_price
+      });
+    } else {
+      next(new Error("No inventory item found"));
+    }
+  } catch (error) {
+    console.error("Error fetching inventory data:", error);
+    res.status(500).json({ message: "Server error: Could not fetch inventory data" });
+  }
+};
+
+/* ***************************
+ *  Delete Inventory Data
+ * ************************** */
+invCont.deleteInventory = async function (req, res, next) {
+  const inv_id = parseInt(req.body.inv_id);
+  try {
+    const deleteResult = await invModel.deleteInventoryItem(inv_id);
+    if (deleteResult.rowCount) {
+      req.flash("notice", "The inventory item was successfully deleted.");
+      res.redirect("/inv/");
+    } else {
+      req.flash("notice", "Sorry, the delete failed.");
+      res.redirect(`/inv/delete/${inv_id}`);
+    }
+  } catch (error) {
+    console.error("Error deleting inventory item:", error);
+    req.flash("notice", "An error occurred. Please try again.");
+    res.redirect(`/inv/delete/${inv_id}`);
   }
 };
 

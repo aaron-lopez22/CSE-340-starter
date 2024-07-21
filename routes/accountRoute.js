@@ -21,6 +21,7 @@ router.post(
     regValidate.checkRegData,
     utilities.handleErrors(accountController.registerAccount)
   )
+  router.get("/logout", accountController.logoutAccount);
   router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildAccountManagement));
 
 

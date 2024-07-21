@@ -29,6 +29,8 @@ validate.checkClassificationData = async (req, res, next) => {
 
 validate.inventoryRules = () => {
     return [
+      body('classification_id').isInt({ gt: 0 }).withMessage('Classification is required'),
+      body('inv_make').trim().isLength({ min: 1 }).withMessage('Make is required'),
         body('classification_id')
             .isInt()
             .withMessage('Classification is required.'),
@@ -66,6 +68,34 @@ validate.inventoryRules = () => {
             .isLength({ min: 1 })
             .withMessage('Color is required.')
     ]
+}
+
+
+validate.checkInventoryData = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+      let nav = await utilities.getNav();
+      let classificationList = await utilities.buildClassificationList(req.body.classification_id);
+      return res.render('inventory/add-inventory', {
+          title: 'Add New Inventory Item',
+          nav,
+          classificationList,
+          errors: errors.array(),
+          locals: {
+              classification_id: req.body.classification_id,
+              inv_make: req.body.inv_make,
+              inv_model: req.body.inv_model,
+              inv_description: req.body.inv_description,
+              inv_price: req.body.inv_price,
+              inv_year: req.body.inv_year,
+              inv_miles: req.body.inv_miles,
+              inv_color: req.body.inv_color,
+              inv_image: req.body.inv_image,
+              inv_thumbnail: req.body.inv_thumbnail
+          }
+      });
+  }
+  next();
 }
 
 /* ***************************

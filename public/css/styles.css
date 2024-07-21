@@ -75,10 +75,37 @@ section {
 .upgradeimages a {
   color: black;
 }
+#tools a {
+  font-size: 1.0rem;
+  text-decoration: none;
+  color: black;
+  padding: 10px 15px;
+  background-color: #00E3FF;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+  margin: 0 5px;
+}
+
+#tools a:hover {
+  color: #00E3FF;
+  background-color: #575757;
+}
+
+/* Ensure the My Account link matches the same styling */
 #myaccount {
   font-size: 1.0rem;
   text-decoration: none;
   color: black;
+  padding: 10px 15px;
+  background-color: #00E3FF;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+  margin: 0 5px;
+}
+
+#myaccount:hover {
+  color: #00E3FF;
+  background-color: #575757;
 }
 body {
   background-image: url('/images/site/checkerboard.jpg');

@@ -47,31 +47,40 @@ async function addClassification(classification_name) {
     return null;
   }
 }
-
+/* ***************************
+ *  Add New Inventory Item
+ * ************************** */
 async function addInventory(inventoryData) {
+  const sql = `
+    INSERT INTO public.inventory (
+      classification_id, inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color
+    ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`;
+  
+  const params = [
+    inventoryData.classification_id,
+    inventoryData.inv_make,
+    inventoryData.inv_model,
+    inventoryData.inv_year,
+    inventoryData.inv_description,
+    inventoryData.inv_image,
+    inventoryData.inv_thumbnail,
+    inventoryData.inv_price,
+    inventoryData.inv_miles,
+    inventoryData.inv_color
+  ];
+
+  console.log("Executing SQL:", sql); // Log SQL query
+  console.log("With parameters:", params); // Log parameters
+
   try {
-    const sql = `
-      INSERT INTO public.inventory (classification_id, inv_make, inv_model, inv_description, inv_price, inv_year, inv_miles, inv_color, inv_image, inv_thumbnail) 
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`;
-    const result = await pool.query(sql, [
-      inventoryData.classification_id,
-      inventoryData.inv_make,
-      inventoryData.inv_model,
-      inventoryData.inv_description,
-      inventoryData.inv_price,
-      inventoryData.inv_year,
-      inventoryData.inv_miles,
-      inventoryData.inv_color,
-      inventoryData.inv_image,
-      inventoryData.inv_thumbnail
-    ]);
+    const result = await pool.query(sql, params);
+    console.log("Query result:", result); // Log query result
     return result.rows[0];
   } catch (error) {
-    console.error("addInventory error " + error);
-    return null;
+    console.error("addInventory error:", error);
+    throw error;
   }
 }
-
 
 
 

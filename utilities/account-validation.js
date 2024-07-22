@@ -114,6 +114,72 @@ validate.checkLoginData = async (req, res, next) => {
   next();
 }
 
+
+
+
+/*  **********************************
+ *  Update Account Data Validation Rules
+ * ********************************* */
+validate.updateAccountRules = () => {
+  return [
+      body("account_firstname").trim().escape().notEmpty().withMessage("Please provide a first name."),
+      body("account_lastname").trim().escape().notEmpty().withMessage("Please provide a last name."),
+      body("account_email").trim().escape().notEmpty().isEmail().normalizeEmail().withMessage("A valid email is required.")
+  ]
+}
+
+validate.checkUpdateAccountData = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+      let nav = await utilities.getNav();
+      const accountData = { account_id: req.params.accountId, ...req.body };
+      return res.render("account/updateAccount", {
+          errors: errors.array(),
+          title: "Update Account Information",
+          nav,
+          accountData,
+      });
+  }
+  next();
+}
+
+/*  **********************************
+*  Change Password Validation Rules
+* ********************************* */
+validate.changePasswordRules = () => {
+  return [
+      body("current_password").trim().notEmpty().withMessage("Current password is required."),
+      body("new_password").trim().isStrongPassword({
+          minLength: 12,
+          minLowercase: 1,
+          minUppercase: 1,
+          minNumbers: 1,
+          minSymbols: 1,
+      }).withMessage("Password does not meet requirements."),
+      body("confirm_new_password").trim().isStrongPassword({
+          minLength: 12,
+          minLowercase: 1,
+          minUppercase: 1,
+          minNumbers: 1,
+          minSymbols: 1,
+      }).withMessage("Password does not meet requirements.")
+  ]
+}
+
+validate.checkChangePasswordData = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+      let nav = await utilities.getNav();
+      const accountData = await accountModel.getAccountById(req.params.accountId);
+      return res.render("account/updateAccount", {
+          errors: errors.array(),
+          title: "Update Account Information",
+          nav,
+          accountData,
+      });
+  }
+  next();
+}
 module.exports = validate
 
 

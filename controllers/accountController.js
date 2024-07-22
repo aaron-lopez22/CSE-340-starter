@@ -147,4 +147,121 @@ async function logoutAccount(req, res) {
   res.redirect("/account/login");
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement, logoutAccount };
+
+
+
+/* ****************************************
+ *  Deliver update account view
+ * *************************************** */
+async function buildUpdateAccount(req, res, next) {
+  let nav = await utilities.getNav();
+  const accountData = await accountModel.getAccountById(req.params.accountId);
+  res.render("account/updateAccount", {
+      title: "Update Account Information",
+      nav,
+      errors: [],
+      message: req.flash('message'),
+      accountData,
+  });
+}
+
+/* ****************************************
+*  Process account update
+* *************************************** */
+async function updateAccount(req, res, next) {
+  let nav = await utilities.getNav();
+  const { account_firstname, account_lastname, account_email } = req.body;
+  const accountId = req.params.accountId;
+
+  try {
+      const updateResult = await accountModel.updateAccount(accountId, account_firstname, account_lastname, account_email);
+
+      if (updateResult) {
+          req.flash('success', 'Account updated successfully.');
+          res.redirect(`/account/`);
+      } else {
+          req.flash('error', 'Account update failed.');
+          res.status(500).render("account/updateAccount", {
+              title: "Update Account Information",
+              nav,
+              errors: [],
+              message: req.flash('error'),
+              accountData: { account_id: accountId, account_firstname, account_lastname, account_email },
+          });
+      }
+  } catch (error) {
+      console.error('Error updating account:', error);
+      req.flash('error', 'An error occurred. Please try again.');
+      res.status(500).render("account/updateAccount", {
+          title: "Update Account Information",
+          nav,
+          errors: [],
+          message: req.flash('error'),
+          accountData: { account_id: accountId, account_firstname, account_lastname, account_email },
+      });
+  }
+}
+
+/* ****************************************
+*  Process password change
+* *************************************** */
+async function changePassword(req, res, next) {
+  let nav = await utilities.getNav();
+  const { current_password, new_password, confirm_new_password } = req.body;
+  const accountId = req.params.accountId;
+
+  try {
+      const accountData = await accountModel.getAccountById(accountId);
+
+      if (await bcrypt.compare(current_password, accountData.account_password)) {
+          if (new_password === confirm_new_password) {
+              const hashedPassword = await bcrypt.hash(new_password, 10);
+              const updateResult = await accountModel.updatePassword(accountId, hashedPassword);
+
+              if (updateResult) {
+                  req.flash('success', 'Password changed successfully.');
+                  res.redirect(`/account/`);
+              } else {
+                  req.flash('error', 'Password change failed.');
+                  res.status(500).render("account/updateAccount", {
+                      title: "Update Account Information",
+                      nav,
+                      errors: [],
+                      message: req.flash('error'),
+                      accountData,
+                  });
+              }
+          } else {
+              req.flash('error', 'New passwords do not match.');
+              res.status(400).render("account/updateAccount", {
+                  title: "Update Account Information",
+                  nav,
+                  errors: [],
+                  message: req.flash('error'),
+                  accountData,
+              });
+          }
+      } else {
+          req.flash('error', 'Current password is incorrect.');
+          res.status(400).render("account/updateAccount", {
+              title: "Update Account Information",
+              nav,
+              errors: [],
+              message: req.flash('error'),
+              accountData,
+          });
+      }
+  } catch (error) {
+      console.error('Error changing password:', error);
+      req.flash('error', 'An error occurred. Please try again.');
+      res.status(500).render("account/updateAccount", {
+          title: "Update Account Information",
+          nav,
+          errors: [],
+          message: req.flash('error'),
+          accountData,
+      });
+  }
+}
+
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement, logoutAccount, buildUpdateAccount, updateAccount, changePassword };

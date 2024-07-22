@@ -30,4 +30,11 @@ router.get("/update/:accountId", utilities.handleErrors(accountController.buildU
 
 router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildAccountManagement));
 
+// New routes for updating account information
+router.get("/update/:accountId", utilities.checkLogin, utilities.handleErrors(accountController.buildUpdateAccount));
+router.post("/update/:accountId", utilities.checkLogin, regValidate.updateAccountRules(), regValidate.checkUpdateAccountData, utilities.handleErrors(accountController.updateAccount));
+
+// New routes for changing password
+router.post("/change-password/:accountId", utilities.checkLogin, regValidate.changePasswordRules(), regValidate.checkChangePasswordData, utilities.handleErrors(accountController.changePassword));
+
 module.exports = router;

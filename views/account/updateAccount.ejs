@@ -1,6 +1,6 @@
 <div class="update-account-container">
     <h1><%= title %></h1>
-    
+
     <% if (errors && errors.length > 0) { %>
         <ul class="notice">
             <% errors.forEach(function(error) { %>
@@ -9,7 +9,13 @@
         </ul>
     <% } %>
 
-    <form action="/account/update/<%= accountData.account_id %>" method="POST">
+    <% if (message) { %>
+        <p class="flash-message"><%= message %></p>
+    <% } %>
+
+    <form action="/account/update/<%= accountData.account_id %>" method="POST" class="update-form">
+        <h2>Account Update</h2>
+
         <label for="account_firstname">First Name:</label>
         <input type="text" name="account_firstname" id="account_firstname" value="<%= accountData.account_firstname %>" required>
 
@@ -19,7 +25,21 @@
         <label for="account_email">Email:</label>
         <input type="email" name="account_email" id="account_email" value="<%= accountData.account_email %>" required>
 
-
         <button type="submit">Update Account</button>
+    </form>
+
+    <form action="/account/change-password/<%= accountData.account_id %>" method="POST" class="update-form">
+        <h2>Change Password</h2>
+
+        <label for="current_password">Current Password:</label>
+        <input type="password" name="current_password" id="current_password" required>
+
+        <label for="new_password">New Password:</label>
+        <input type="password" name="new_password" id="new_password" required>
+
+        <label for="confirm_new_password">Confirm New Password:</label>
+        <input type="password" name="confirm_new_password" id="confirm_new_password" required>
+
+        <button type="submit">Change Password</button>
     </form>
 </div>

@@ -847,3 +847,45 @@ input:required:valid {
   background-color: #00BBD4;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
+
+/* Media Queries for Small Screens */
+@media (max-width: 768px) {
+  header {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #upgrades {
+    grid-template-columns: 1fr;
+  }
+
+  .content {
+    grid-template-columns: 1fr;
+  }
+
+  #inv-display {
+    grid-template-columns: 1fr;
+  }
+
+  #wrapper {
+    width: 90%;
+    padding: 10px;
+  }
+
+  .inventory-container,
+  .classification-container,
+  .management-container,
+  .account-management-container,
+  .update-account-container {
+    width: 95%;
+  }
+
+  button {
+    padding: 10px;
+  }
+}

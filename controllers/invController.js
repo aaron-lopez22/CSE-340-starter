@@ -378,4 +378,42 @@ invCont.deleteInventory = async function (req, res, next) {
   }
 };
 
+
+
+invCont.searchInventory = async function (req, res, next) {
+  const { query } = req.body;
+  try {
+    const data = await invModel.searchInventory(query);
+    let nav = await utilities.getNav();
+    if (data.length === 0) {
+      return res.render("inventory/search-results", {
+        title: "Search Results",
+        nav,
+        message: "No inventory items found matching your criteria.",
+        results: []
+      });
+    }
+    res.render("inventory/search-results", {
+      title: "Search Results",
+      nav,
+      message: null, // Ensure message is defined
+      results: data
+    });
+  } catch (error) {
+    console.error("Error searching inventory:", error);
+    next(error);
+  }
+};
+
+
+// Method to render the search page
+invCont.buildSearchPage = async function (req, res, next) {
+  let nav = await utilities.getNav();
+  res.render("inventory/search", {
+    title: "Search Inventory",
+    nav,
+    message: null
+  });
+};
+
 module.exports = invCont;

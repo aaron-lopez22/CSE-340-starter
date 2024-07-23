@@ -18,4 +18,7 @@ router.post("/update", authMiddleware.checkJWTToken, authMiddleware.checkAccount
 router.get("/delete/:inventoryId", authMiddleware.checkJWTToken, authMiddleware.checkAccountType, utilities.handleErrors(invController.buildDeleteInventoryView)); // Route to show delete confirmation view
 router.post("/delete", authMiddleware.checkJWTToken, authMiddleware.checkAccountType, utilities.handleErrors(invController.deleteInventory)); // Route to handle the actual delete
 
+router.get("/search", utilities.handleErrors(invController.buildSearchPage));
+router.post("/search", utilities.handleErrors(invController.searchInventory));
+
 module.exports = router;

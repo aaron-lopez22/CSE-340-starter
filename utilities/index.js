@@ -23,7 +23,8 @@ Util.getNav = async function (req, res, next) {
       row.classification_name +
       "</a>"
     list += "</li>"
-  })
+  });
+  list += '<li><a href="/inv/search" title="Search Inventory">Search Inventory</a></li>';
   list += "</ul>"
   return list
 }

@@ -1,0 +1,25 @@
+<div>
+    <h1><%= title %></h1>
+    <% if (message) { %>
+      <p class="flash-message"><%= message %></p>
+    <% } else { %>
+      <ul id="inv-display">
+        <% results.forEach(function(result) { %>
+          <li>
+            <a href="/inv/details/<%= result.inv_id %>" title="View <%= result.inv_make %> <%= result.inv_model %> details">
+              <img src="<%= result.inv_thumbnail %>" alt="Image of <%= result.inv_make %> <%= result.inv_model %>">
+            </a>
+            <div class="namePrice">
+              <hr>
+              <h2>
+                <a href="/inv/details/<%= result.inv_id %>" title="View <%= result.inv_make %> <%= result.inv_model %> details">
+                  <%= result.inv_make %> <%= result.inv_model %>
+                </a>
+              </h2>
+              <span>$<%= new Intl.NumberFormat('en-US').format(result.inv_price) %></span>
+            </div>
+          </li>
+        <% }) %>
+      </ul>
+    <% } %>
+</div>

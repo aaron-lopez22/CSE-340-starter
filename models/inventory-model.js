@@ -139,5 +139,26 @@ async function deleteInventoryItem(inv_id) {
   }
 }
 
+/* ***************************
+ *  Search inventory items
+ * ************************** */
+async function searchInventory(query) {
+  try {
+    const sqlQuery = `
+      SELECT i.*, c.classification_name 
+      FROM public.inventory i
+      JOIN public.classification c ON i.classification_id = c.classification_id
+      WHERE i.inv_make ILIKE $1
+      OR i.inv_model ILIKE $1
+      OR i.inv_year::text ILIKE $1
+      OR c.classification_name ILIKE $1`;
+    const values = [`%${query}%`];
+    const data = await pool.query(sqlQuery, values);
+    return data.rows;
+  } catch (error) {
+    console.error("searchInventory error " + error);
+    throw new Error("Search failed");
+  }
+}
 
-module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByInvId, addClassification, addInventory, updateInventory, deleteInventoryItem};
+module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByInvId, addClassification, addInventory, updateInventory, deleteInventoryItem, searchInventory};
